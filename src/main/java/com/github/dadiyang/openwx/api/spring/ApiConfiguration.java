@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -24,18 +25,21 @@ import java.util.Properties;
  */
 @Configuration
 public class ApiConfiguration {
-    private final HttpApiProxyFactory factory;
     private static final String CLASSPATH_PRE = "classpath:";
+    @Autowired(required = false)
+    private HttpApiProxyFactory httpApiProxyFactory;
+    private @Value("${openwx.api.configPath:}")
+    String configPath;
 
     /**
      * 初始化
      */
-    @Autowired(required = false)
-    public ApiConfiguration(HttpApiProxyFactory factory,
-                            @Value("openwx.api.configPath:") String configPath) {
-        if (factory != null) {
-            this.factory = factory;
-        } else if (configPath != null && !configPath.isEmpty()) {
+    @PostConstruct
+    public void init() {
+        if (httpApiProxyFactory != null) {
+            return;
+        }
+        if (configPath != null && !configPath.isEmpty()) {
             Properties p = new Properties();
             if (configPath.startsWith(CLASSPATH_PRE)) {
                 // load from class path;
@@ -53,39 +57,39 @@ public class ApiConfiguration {
                     throw new IllegalStateException("connot initialize openwx apis, read config error: " + configPath, e);
                 }
             }
-            this.factory = new HttpApiProxyFactory(p);
+            this.httpApiProxyFactory = new HttpApiProxyFactory(p);
         } else {
-            this.factory = new HttpApiProxyFactory();
+            this.httpApiProxyFactory = new HttpApiProxyFactory();
         }
     }
 
     @Bean
     public ClientApi clientApi() {
-        return factory.getProxy(ClientApi.class);
+        return httpApiProxyFactory.getProxy(ClientApi.class);
     }
 
     @Bean
     public FriendApi friendApi() {
-        return factory.getProxy(FriendApi.class);
+        return httpApiProxyFactory.getProxy(FriendApi.class);
     }
 
     @Bean
     public GroupApi groupApi() {
-        return factory.getProxy(GroupApi.class);
+        return httpApiProxyFactory.getProxy(GroupApi.class);
     }
 
     @Bean
     public MediaApi mediaApi() {
-        return factory.getProxy(MediaApi.class);
+        return httpApiProxyFactory.getProxy(MediaApi.class);
     }
 
     @Bean
     public MessageApi messageApi() {
-        return factory.getProxy(MessageApi.class);
+        return httpApiProxyFactory.getProxy(MessageApi.class);
     }
 
     @Bean
     public UserApi userApi() {
-        return factory.getProxy(UserApi.class);
+        return httpApiProxyFactory.getProxy(UserApi.class);
     }
 }
