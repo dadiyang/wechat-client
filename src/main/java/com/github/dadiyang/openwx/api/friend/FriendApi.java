@@ -26,7 +26,7 @@ public interface FriendApi {
      * @param criteria 搜索接口需要的参数
      * @return 好友信息列表
      */
-    @HttpReq("/search_friend")
+    @HttpReq(value = "/search_friend", method = "POST")
     List<FriendInfo> searchFriend(SearchCriteria criteria);
 
     /**

@@ -1,6 +1,7 @@
 package com.github.dadiyang.openwx.api.param;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 搜索条件
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2019/1/1
  */
 @Data
+@NoArgsConstructor
 public class SearchCriteria {
     private String client;
     /**
@@ -27,4 +29,16 @@ public class SearchCriteria {
      * 好友备注名称
      */
     private String markname;
+    /**
+     * 省份
+     */
+    private String province;
+    /**
+     * 城市
+     */
+    private String city;
+
+    public SearchCriteria(String client) {
+        this.client = client;
+    }
 }

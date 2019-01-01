@@ -2,6 +2,7 @@ package com.github.dadiyang.openwx.api.param;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 修改好友或群成员备注名称
@@ -10,6 +11,7 @@ import lombok.Data;
  * @date 2019/1/1
  */
 @Data
+@NoArgsConstructor
 public class MarkNameParam {
     private String client;
     /**
@@ -34,4 +36,7 @@ public class MarkNameParam {
     @JSONField(name = "new_markname")
     private String newMarkname;
 
+    public MarkNameParam(String client) {
+        this.client = client;
+    }
 }
