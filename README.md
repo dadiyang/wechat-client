@@ -48,7 +48,7 @@
 <dependency>
     <groupId>com.github.dadiyang</groupId>
     <artifactId>wechat-client</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 ## 二、设置微信服务地址
