@@ -68,7 +68,7 @@ public interface GroupApi {
     CreateGroupResult createCroup(@Param("client") String client, @Param("friends") String friends, @Param("displayname") String displayname);
 
     /**
-     * 创建群组
+     * 邀请好友入群
      *
      * @param client      自定义微信帐号，用于唯一区分不同微信帐号客户端
      * @param friends     好友的id（多个好友id用逗号分割）
