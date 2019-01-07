@@ -26,9 +26,10 @@ import java.util.Properties;
 @Configuration
 public class ApiConfiguration {
     private static final String CLASSPATH_PRE = "classpath:";
+    private static final String FILE_PRE = "file:";
     @Autowired(required = false)
     private HttpApiProxyFactory httpApiProxyFactory;
-    private @Value("${openwx.api.configPath:}")
+    private @Value("${wechat.api.configPath:}")
     String configPath;
 
     /**
@@ -48,8 +49,10 @@ public class ApiConfiguration {
                 } catch (IOException e) {
                     throw new IllegalStateException("connot initialize openwx apis, read config error: " + configPath, e);
                 }
-
             } else {
+                if (configPath.startsWith(FILE_PRE)) {
+                    configPath = configPath.replaceFirst(FILE_PRE, "");
+                }
                 // load from file
                 try {
                     p.load(new FileInputStream(configPath));

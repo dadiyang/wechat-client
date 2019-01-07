@@ -8,7 +8,7 @@ import com.github.dadiyang.httpinvoker.annotation.Param;
  * @author huangxuyang
  * date 2019/1/1
  */
-@HttpApi(prefix = "${openwx.host}/openwx")
+@HttpApi(prefix = "${wechat.host}/openwx")
 public interface UserApi {
     /**
      * 获取用户数据

@@ -17,7 +17,7 @@ import java.util.List;
  * @author huangxuyang
  * date 2019/1/1
  */
-@HttpApi(prefix = "${openwx.host}/openwx")
+@HttpApi(prefix = "${wechat.host}/openwx")
 public interface GroupApi {
     /**
      * 搜索群组对象

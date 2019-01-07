@@ -8,7 +8,7 @@ import com.github.dadiyang.httpinvoker.annotation.Param;
  * @author huangxuyang
  * date 2019/1/1
  */
-@HttpApi(prefix = "${openwx.host}/openwx")
+@HttpApi(prefix = "${wechat.host}/openwx")
 public interface MediaApi {
     /**
      * 上传媒体文件，获取media_id, 用于稍后发送

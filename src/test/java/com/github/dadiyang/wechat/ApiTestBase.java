@@ -13,7 +13,7 @@ public class ApiTestBase {
 
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty("openwx.host", "http://localhost:" + PORT);
+        System.setProperty("wechat.host", "http://localhost:" + PORT);
         factory = new HttpApiProxyFactory();
     }
 }

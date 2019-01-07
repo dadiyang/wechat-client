@@ -13,7 +13,7 @@ import java.io.InputStream;
  * @author huangxuyang
  * date 2019/1/1
  */
-@HttpApi(prefix = "${openwx.host}/openwx")
+@HttpApi(prefix = "${wechat.host}/openwx")
 public interface ClientApi {
     /**
      * 获取进程运行信息

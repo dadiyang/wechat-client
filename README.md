@@ -39,3 +39,62 @@
  |MessageApi| consult |发送消息给好友并等待好友回答|
  
 具体方法参数含义及使用说明，请查看具体类的代码注释或查看 [接口文档](https://github.com/sjdy521/Mojo-Weixin/blob/master/API.md)
+
+# 使用
+
+## 一、引入 maven 依赖
+
+```xml
+<dependency>
+    <groupId>com.github.dadiyang</groupId>
+    <artifactId>wechat-client</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+## 二、设置微信服务地址
+
+通过系统参数设置 Mojo-Weixin 的服务地址
+```java
+System.setProperty("wechat.host", "http://localhost:3000");
+```
+
+## 三、获取Api对象
+
+### Spring项目
+
+在Spring的项目中，只需要在ComponentScan中添加 `com.github.dadiyang.wechat.spring` 即可使用@AutoWired获取api接口的实现类，即 
+
+```java
+@ComponentScan(basePackages = {"com.github.dadiyang.wechat.spring"})
+public class Application {
+
+}
+```
+
+然后就可以在需要使用的地方使用 @Autowired 注解了: 
+
+```java
+@Autowired
+private ClientApi clientApi;
+@Autowired
+private FriendApi friendApi;
+@Autowired
+private GroupApi groupApi;
+@Autowired
+private MediaApi mediaApi;
+@Autowired
+private MessageApi messageApi;
+@Autowired
+private UserApi userApi;
+```
+
+### 普通项目
+
+非 Spring 项目需要自己调用工厂方法获取: 
+
+```java
+HttpApiProxyFactory factory = new HttpApiProxyFactory();
+FriendApi friendApi = factory.getProxy(FriendApi.class);
+GroupApi groupApi = factory.getProxy(GroupApi.class);
+```
+
